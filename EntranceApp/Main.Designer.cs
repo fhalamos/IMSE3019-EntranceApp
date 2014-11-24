@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Configure = new System.Windows.Forms.TabPage();
+            this.entranceTimeStaticLabel = new System.Windows.Forms.Label();
             this.carPatentLabel = new System.Windows.Forms.Label();
             this.carPatentStaticLabel = new System.Windows.Forms.Label();
             this.cardIdLabel = new System.Windows.Forms.Label();
@@ -75,6 +76,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.entranceTimeLabel = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.Configure.SuspendLayout();
             this.Credit.SuspendLayout();
@@ -90,13 +92,15 @@
             this.tabControl.Location = new System.Drawing.Point(12, 13);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(412, 322);
+            this.tabControl.Size = new System.Drawing.Size(412, 395);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // Configure
             // 
             this.Configure.BackColor = System.Drawing.Color.LightBlue;
+            this.Configure.Controls.Add(this.entranceTimeLabel);
+            this.Configure.Controls.Add(this.entranceTimeStaticLabel);
             this.Configure.Controls.Add(this.carPatentLabel);
             this.Configure.Controls.Add(this.carPatentStaticLabel);
             this.Configure.Controls.Add(this.cardIdLabel);
@@ -108,9 +112,20 @@
             this.Configure.Location = new System.Drawing.Point(4, 31);
             this.Configure.Name = "Configure";
             this.Configure.Padding = new System.Windows.Forms.Padding(3);
-            this.Configure.Size = new System.Drawing.Size(404, 287);
+            this.Configure.Size = new System.Drawing.Size(404, 360);
             this.Configure.TabIndex = 0;
             this.Configure.Text = "Entrance Application";
+            // 
+            // entranceTimeStaticLabel
+            // 
+            this.entranceTimeStaticLabel.AutoSize = true;
+            this.entranceTimeStaticLabel.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.entranceTimeStaticLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.entranceTimeStaticLabel.Location = new System.Drawing.Point(12, 282);
+            this.entranceTimeStaticLabel.Name = "entranceTimeStaticLabel";
+            this.entranceTimeStaticLabel.Size = new System.Drawing.Size(179, 23);
+            this.entranceTimeStaticLabel.TabIndex = 18;
+            this.entranceTimeStaticLabel.Text = "Entrance time";
             // 
             // carPatentLabel
             // 
@@ -210,7 +225,7 @@
             this.Credit.Location = new System.Drawing.Point(4, 31);
             this.Credit.Name = "Credit";
             this.Credit.Padding = new System.Windows.Forms.Padding(3);
-            this.Credit.Size = new System.Drawing.Size(366, 287);
+            this.Credit.Size = new System.Drawing.Size(404, 360);
             this.Credit.TabIndex = 1;
             this.Credit.Text = "Credit";
             this.Credit.UseVisualStyleBackColor = true;
@@ -374,7 +389,7 @@
             this.Debit.Location = new System.Drawing.Point(4, 31);
             this.Debit.Name = "Debit";
             this.Debit.Padding = new System.Windows.Forms.Padding(3);
-            this.Debit.Size = new System.Drawing.Size(366, 287);
+            this.Debit.Size = new System.Drawing.Size(404, 360);
             this.Debit.TabIndex = 2;
             this.Debit.Text = "Debit";
             this.Debit.UseVisualStyleBackColor = true;
@@ -573,12 +588,21 @@
             // 
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // entranceTimeLabel
+            // 
+            this.entranceTimeLabel.AutoSize = true;
+            this.entranceTimeLabel.Location = new System.Drawing.Point(12, 318);
+            this.entranceTimeLabel.Name = "entranceTimeLabel";
+            this.entranceTimeLabel.Size = new System.Drawing.Size(186, 22);
+            this.entranceTimeLabel.TabIndex = 19;
+            this.entranceTimeLabel.Text = "                ";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(436, 347);
+            this.ClientSize = new System.Drawing.Size(443, 420);
             this.Controls.Add(this.tabControl);
             this.Name = "Main";
             this.Text = "Parking System - Shop App";
@@ -642,6 +666,8 @@
         private System.Windows.Forms.Label carPatentLabel;
         private System.Windows.Forms.Label carPatentStaticLabel;
         private System.Windows.Forms.Button btnEject;
+        private System.Windows.Forms.Label entranceTimeStaticLabel;
+        private System.Windows.Forms.Label entranceTimeLabel;
     }
 }
 

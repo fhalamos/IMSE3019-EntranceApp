@@ -11,6 +11,7 @@
         3. The current application enables the Entrance Gate to administrate the parking card.
 
         4. The 1st block of Sector 14 is used to save the card id. THe 2nd block of Sector 14 is used to save the car patent.
+           The 3rd block of Sector 14 is used to save the entrance time.
 
         5. The 3 blocks of Sector 15 are used to save the amounts of the 3 biggest purchases, i.e. blocks 0x3C, 0x3D, 0x3E
 *///=======================================================================================================================
@@ -46,11 +47,13 @@ namespace imseWCard2
         private int amount1Block = 0x3D;
         private int amount2Block = 0x3E;
 
-        //Block 1 of sector 14, i.e block 0x39, is used to save card ID. Block 2, i.e block 0x3A, is used to save car patent.
+        //Block 0 of sector 14, i.e block 0x38, is used to save card ID. Block 1, i.e block 0x39, is used to save car patent.
+        //Block 2, i.e. block 0x3A is used to save the time of entrance
 
         private int informationSector = 14;
         private int cardIdBlock = 0x38;
-        private int carPatentBlock = 0x3A;
+        private int carPatentBlock = 0x39;
+        private int entranceTimeBlock = 0x3A;
 
 
         //Parking fees
@@ -86,6 +89,7 @@ namespace imseWCard2
             cardInformationStaticLabel.Visible = false;
             cardIdStaticLabel.Visible = false;
             carPatentStaticLabel.Visible = false;
+            entranceTimeStaticLabel.Visible = false;
 
 
         }
@@ -138,40 +142,42 @@ namespace imseWCard2
             }
         }
 
-        private void unDisplayCardInformation()
+        private void unDisplayInformation()
         { 
             cardInformationStaticLabel.Visible = false;
             cardIdStaticLabel.Visible = false;
             carPatentStaticLabel.Visible = false;
+            entranceTimeStaticLabel.Visible = false;
 
             cardIdLabel.Text = "";
             carPatentLabel.Text = "";
+            entranceTimeLabel.Text = "";
         }
 
-        private void displayCardInformation()
+        private void displayInformation()
         {
             string cardId="";
             string carPatent = "";
+            string entranceTime = "";
 
-            if (CADw.read(cardIdBlock, ref cardId) == false)
+            if (CADw.read(cardIdBlock, ref cardId) == false || CADw.read(carPatentBlock, ref carPatent) == false ||
+                CADw.read(entranceTimeBlock, ref entranceTime) == false)
             {
                 textBoxMsg.Text = "Read value error!";
                 return;
             }
 
-            
-            if (CADw.read(carPatentBlock, ref carPatent) == false)
-            {
-                textBoxMsg.Text = "Read value error!";
-                return;
-            }
-            // Display the value 
+            // Display the information 
             cardInformationStaticLabel.Visible = true;
             cardIdStaticLabel.Visible = true;
             carPatentStaticLabel.Visible = true;
+            entranceTimeStaticLabel.Visible = true;
 
             cardIdLabel.Text = cardId;
             carPatentLabel.Text = carPatent;
+
+            string[] time = entranceTime.Split('_');
+            entranceTimeLabel.Text = time[0]+" "+time[1];
         }
 
         private bool authenticateSector(int sector)
@@ -204,7 +210,7 @@ namespace imseWCard2
                 ejected = false;
             }
 
-            unDisplayCardInformation();
+            unDisplayInformation();
             btnEject.Enabled = false;
             connected = false;
             return;
@@ -216,6 +222,14 @@ namespace imseWCard2
             CADw.updateValueBlock(amount1Block, 0);
             CADw.updateValueBlock(amount2Block, 0);
         }
+
+        private void resetCardInformation()
+        {
+            CADw.write(cardIdBlock, "");
+            CADw.write(carPatentBlock, "");
+            CADw.write(entranceTimeBlock, ""); 
+        }
+
 
         private string toDollar(long amount)
         {
@@ -250,13 +264,18 @@ namespace imseWCard2
 
             if (authenticateSector(informationSector))
             {
+                //In case there is old information written on it
+                resetCardInformation();
+                
                 assignCardId();
 
                 readAndWriteCarPatent();
 
+                assignEntranceTime();
+                
                 resetAmountMemoryValues();
 
-                displayCardInformation();
+                displayInformation();
 
                 ejectCard();
 
@@ -265,6 +284,17 @@ namespace imseWCard2
                 btnEject.Enabled = false;
             }
             
+        }
+
+        private void assignEntranceTime()
+        {
+            System.DateTime entranceTime = System.DateTime.Now;
+            
+            string date = entranceTime.ToShortDateString();
+            string time = entranceTime.ToShortTimeString();
+            string date_time = date+"_"+time;
+           
+            CADw.write(entranceTimeBlock, date_time);
         }
 
         private void ejectCard()
@@ -685,6 +715,7 @@ namespace imseWCard2
             }
         }
 
+   
         //****************END OUT OF USE ****************************
     }
 }
