@@ -8,7 +8,7 @@
 
         2. The reference imseWSC1K should be added.
 
-        3. The current application enables a Shop Store to administrate the parking card.
+        3. The current application enables the Entrance Gate to administrate the parking card.
 
         4. The 1st block of Sector 14 is used to save the card id. THe 2nd block of Sector 14 is used to save the car patent.
 
@@ -62,6 +62,9 @@ namespace imseWCard2
         private int combo2freeHours = 2;
         private int combo2MoneyNeeded = 20000;
 
+        //True when the card has already been ejected.
+        private bool ejected = false;
+
         public Main()
         {
             InitializeComponent();
@@ -71,13 +74,20 @@ namespace imseWCard2
         {
             if (!CADw.initialize())  // initialize the object CADw
             {
-                textBoxMsg.Text = "Reader initialization failed!";
+                textBoxMsg.Text = "Reader initialization failed! Please call for asistance.";
                 return;
             }
-            textBoxMsg.Text = "Reader initialization successful.";
             timer1.Enabled = true;
             timer2.Enabled = false;
             timer3.Enabled = false;
+
+            textBoxMsg.Text = "No card available. Please call for asistance";
+
+            cardInformationStaticLabel.Visible = false;
+            cardIdStaticLabel.Visible = false;
+            carPatentStaticLabel.Visible = false;
+
+
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -95,7 +105,6 @@ namespace imseWCard2
                     timer2.Enabled = false;
                     timer3.Enabled = false;
                     transectionDone = false;
-                    labelAmt.Text = "";
                     break;
                 case 1:
                     timer1.Enabled = false;
@@ -124,33 +133,25 @@ namespace imseWCard2
                 if (!connected)
                 {
                     announceConnection();
-                }
-
-                if (authenticateSector(informationSector))
-                  displayCardInformation();
-
-                // Authenticate before reading or writing to a sector
-                if (authenticateSector(amountsSector))
-                {
-                    // Disable "Charge" button if Amount quantity is 0.
-                    disableOrEnableChargeButton();
-
-                    long amount = displayAmountOfParkingCredit();
-
-                    //Display amout of free parking hours available
-                    quantityFreeHourslabel.Text = calculateFreeParkingHours(amount);
+                    btnEject.Enabled = true;
                 }
             }
+        }
+
+        private void unDisplayCardInformation()
+        { 
+            cardInformationStaticLabel.Visible = false;
+            cardIdStaticLabel.Visible = false;
+            carPatentStaticLabel.Visible = false;
+
+            cardIdLabel.Text = "";
+            carPatentLabel.Text = "";
         }
 
         private void displayCardInformation()
         {
             string cardId="";
             string carPatent = "";
-
-            //The following should be done in the entrance gate application
-            CADw.write(cardIdBlock, "1234");
-            CADw.write(carPatentBlock, "FDGH96");
 
             if (CADw.read(cardIdBlock, ref cardId) == false)
             {
@@ -165,7 +166,11 @@ namespace imseWCard2
                 return;
             }
             // Display the value 
-            cardIdLabel.Text = cardId + "";
+            cardInformationStaticLabel.Visible = true;
+            cardIdStaticLabel.Visible = true;
+            carPatentStaticLabel.Visible = true;
+
+            cardIdLabel.Text = cardId;
             carPatentLabel.Text = carPatent;
         }
 
@@ -178,95 +183,38 @@ namespace imseWCard2
             }
             return true;
         }
-
-        private long displayAmountOfParkingCredit()
-        {
-            // Read the value of the 3 blocks in card, sums them and shows the sum in labelAmt
-            long amount0 = 0;
-            if (CADw.readValueBlock(amount0Block, ref amount0) == false)
-            {
-                textBoxMsg.Text = "Read value error!";
-                return 0;
-            }
-
-            long amount1 = 0;
-            if (CADw.readValueBlock(amount1Block, ref amount1) == false)
-            {
-                textBoxMsg.Text = "Read value error!";
-                return 0;
-            }
-
-            long amount2 = 0;
-            if (CADw.readValueBlock(amount2Block, ref amount2) == false)
-            {
-                textBoxMsg.Text = "Read value error!";
-                return 0;
-            }
-
-            // Display the value 
-            labelAmt.Text = toDollar(amount0 + amount1 + amount2);
-            return amount0 + amount1 + amount2;
-        }
-
+     
         private void announceConnection()
         {
             connected = true;
-            textBoxMsg.Text = "Connected.";
+            textBoxMsg.Text = "Welcome! Press eject card buttom";
         }
 
         private void announceDisconection()
         {
-            // Connection lost.
-            if (connected)
+            if (connected && !ejected)
             {
-                textBoxMsg.Text = "Lost connection!";
-                labelAmt.Text = "";
-                quantityFreeHourslabel.Text = "";
-                cardIdLabel.Text = "";
-                carPatentLabel.Text = "";
+                textBoxMsg.Text = "Lost connection! Please call for asistance.";
             }
-            btnConfigGo.Enabled = false;
+
+            // Connection lost.
+            if (connected && ejected)
+            {
+                textBoxMsg.Text = "Bye Bye! Enjoy your shopping!";
+                ejected = false;
+            }
+
+            unDisplayCardInformation();
+            btnEject.Enabled = false;
             connected = false;
             return;
         }
 
-        private void disableOrEnableChargeButton()
+        private void resetAmountMemoryValues()
         {
-            if (textBoxConfigAmt.Text.Equals("0") || textBoxConfigAmt.Text.Equals(""))
-            {
-                btnConfigGo.Enabled = false;
-            }
-            else
-            {
-                btnConfigGo.Enabled = true;
-            }
-        }
-
-        private void resetMemoryValues()
-        {
-            CADw.write(cardIdBlock, "");
-            CADw.write(carPatentBlock, "");
             CADw.updateValueBlock(amount0Block, 0);
             CADw.updateValueBlock(amount1Block, 0);
             CADw.updateValueBlock(amount2Block, 0);
-        }
-
-        private string calculateFreeParkingHours(long credit)
-        {
-            if (credit >= combo1MoneyNeeded)
-            {
-                return combo1freeHours+"";
-            }
-
-            if (credit >= combo2MoneyNeeded)
-            {
-                return combo2freeHours + "";
-            }
-
-            else
-            {
-                return "None";
-            }
         }
 
         private string toDollar(long amount)
@@ -297,54 +245,57 @@ namespace imseWCard2
             return str;
         }
 
-        private void btnConfigGo_Click(object sender, EventArgs e)
+        private void btnEject_Click(object sender, EventArgs e)
         {
-            /* Initialize a card's value
-             * */
-            long Amount;
-            int tempInt;
 
-            // Check whether the value in the text box is valid.
-            if (!int.TryParse(textBoxConfigAmt.Text, out tempInt))
+            if (authenticateSector(informationSector))
             {
-                textBoxConfigAmt.Focus();
-                textBoxConfigAmt.Text = "0";
-                return;
+                assignCardId();
+
+                readAndWriteCarPatent();
+
+                resetAmountMemoryValues();
+
+                displayCardInformation();
+
+                ejectCard();
+
+                textBoxMsg.Text = "Please take your card";
+
+                btnEject.Enabled = false;
             }
-            // convert to cents and store into card
-            Amount = 100*Convert.ToInt32(textBoxConfigAmt.Text);
             
-            //@fhalamos
-            //We will save amount only if it is bigger than any of the other 3 amounts.
-            long amount0 = 0;
-            CADw.readValueBlock(amount0Block, ref amount0);
-            long amount1 = 0;
-            CADw.readValueBlock(amount1Block, ref amount1);
-            long amount2 = 0;
-            CADw.readValueBlock(amount2Block, ref amount2);
-            
-            //We need to know which is the smallest amount actually saved
-            long min0 = Math.Min(amount0, amount1);
-            long min = Math.Min(min0, amount2);
+        }
 
-            if (Amount > min)
-            {
-                if (min == amount0)
-                    CADw.updateValueBlock(amount0Block, Amount);
-                else if (min == amount1)
-                    CADw.updateValueBlock(amount1Block, Amount);
-                else if (min == amount2)
-                    CADw.updateValueBlock(amount2Block, Amount);
-                
+        private void ejectCard()
+        {
+            //phisical ejection of card
+            ejected = true;
+            return;
+        }
 
-                System.Windows.Forms.MessageBox.Show(toDollar(Amount) + " dollars added to your parking credit!");
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show("Ups! Your purchase is too small to be saved, it is smaller than any of your 3 biggest purchases");
-            }
+        private void readAndWriteCarPatent()
+        {
+            string carPatent = readCarPatent();
+            CADw.write(carPatentBlock, carPatent);
+        }
 
-            textBoxConfigAmt.Text = "0";
+        private string readCarPatent()
+        {
+            //Here the camera reads the car patents and returns the value
+            return "FDGH96";
+        }
+
+        private void assignCardId()
+        {
+            string cardId = getNewCardId();
+            CADw.write(cardIdBlock, cardId);
+        }
+
+        private string getNewCardId()
+        {
+            //Here we could implement some way to save the ids already assigned.
+            return "1234";
         }
 
 

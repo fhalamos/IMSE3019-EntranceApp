@@ -32,18 +32,12 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Configure = new System.Windows.Forms.TabPage();
             this.carPatentLabel = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.labelAmt = new System.Windows.Forms.Label();
-            this.quantityFreeHourslabel = new System.Windows.Forms.Label();
-            this.freeHourslabel = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.carPatentStaticLabel = new System.Windows.Forms.Label();
             this.cardIdLabel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.cardInformationStaticLabel = new System.Windows.Forms.Label();
+            this.cardIdStaticLabel = new System.Windows.Forms.Label();
             this.textBoxMsg = new System.Windows.Forms.TextBox();
-            this.btnConfigGo = new System.Windows.Forms.Button();
-            this.textBoxConfigAmt = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnEject = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.Credit = new System.Windows.Forms.TabPage();
             this.btnCredit = new System.Windows.Forms.Button();
@@ -96,7 +90,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 13);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(374, 511);
+            this.tabControl.Size = new System.Drawing.Size(412, 322);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -104,148 +98,87 @@
             // 
             this.Configure.BackColor = System.Drawing.Color.LightBlue;
             this.Configure.Controls.Add(this.carPatentLabel);
-            this.Configure.Controls.Add(this.label10);
-            this.Configure.Controls.Add(this.labelAmt);
-            this.Configure.Controls.Add(this.quantityFreeHourslabel);
-            this.Configure.Controls.Add(this.freeHourslabel);
-            this.Configure.Controls.Add(this.label9);
+            this.Configure.Controls.Add(this.carPatentStaticLabel);
             this.Configure.Controls.Add(this.cardIdLabel);
-            this.Configure.Controls.Add(this.label8);
-            this.Configure.Controls.Add(this.label3);
+            this.Configure.Controls.Add(this.cardInformationStaticLabel);
+            this.Configure.Controls.Add(this.cardIdStaticLabel);
             this.Configure.Controls.Add(this.textBoxMsg);
-            this.Configure.Controls.Add(this.btnConfigGo);
-            this.Configure.Controls.Add(this.textBoxConfigAmt);
-            this.Configure.Controls.Add(this.label2);
+            this.Configure.Controls.Add(this.btnEject);
             this.Configure.Controls.Add(this.label1);
             this.Configure.Location = new System.Drawing.Point(4, 31);
             this.Configure.Name = "Configure";
             this.Configure.Padding = new System.Windows.Forms.Padding(3);
-            this.Configure.Size = new System.Drawing.Size(366, 476);
+            this.Configure.Size = new System.Drawing.Size(404, 287);
             this.Configure.TabIndex = 0;
-            this.Configure.Text = "Shop Application";
+            this.Configure.Text = "Entrance Application";
             // 
             // carPatentLabel
             // 
             this.carPatentLabel.AutoSize = true;
-            this.carPatentLabel.Location = new System.Drawing.Point(149, 152);
+            this.carPatentLabel.Location = new System.Drawing.Point(148, 242);
             this.carPatentLabel.Name = "carPatentLabel";
             this.carPatentLabel.Size = new System.Drawing.Size(153, 22);
             this.carPatentLabel.TabIndex = 17;
             this.carPatentLabel.Text = "             ";
             // 
-            // label10
+            // carPatentStaticLabel
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 152);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(131, 22);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Car Patent:";
-            // 
-            // labelAmt
-            // 
-            this.labelAmt.AutoSize = true;
-            this.labelAmt.Location = new System.Drawing.Point(193, 194);
-            this.labelAmt.Name = "labelAmt";
-            this.labelAmt.Size = new System.Drawing.Size(120, 22);
-            this.labelAmt.TabIndex = 15;
-            this.labelAmt.Text = "          ";
-            // 
-            // quantityFreeHourslabel
-            // 
-            this.quantityFreeHourslabel.AutoSize = true;
-            this.quantityFreeHourslabel.Location = new System.Drawing.Point(237, 224);
-            this.quantityFreeHourslabel.Name = "quantityFreeHourslabel";
-            this.quantityFreeHourslabel.Size = new System.Drawing.Size(98, 22);
-            this.quantityFreeHourslabel.TabIndex = 14;
-            this.quantityFreeHourslabel.Text = "        ";
-            // 
-            // freeHourslabel
-            // 
-            this.freeHourslabel.AutoSize = true;
-            this.freeHourslabel.Location = new System.Drawing.Point(12, 224);
-            this.freeHourslabel.Name = "freeHourslabel";
-            this.freeHourslabel.Size = new System.Drawing.Size(219, 22);
-            this.freeHourslabel.TabIndex = 13;
-            this.freeHourslabel.Text = "Free Parking Hours:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label9.Location = new System.Drawing.Point(12, 275);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(153, 23);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Charge Card";
+            this.carPatentStaticLabel.AutoSize = true;
+            this.carPatentStaticLabel.Location = new System.Drawing.Point(11, 242);
+            this.carPatentStaticLabel.Name = "carPatentStaticLabel";
+            this.carPatentStaticLabel.Size = new System.Drawing.Size(131, 22);
+            this.carPatentStaticLabel.TabIndex = 16;
+            this.carPatentStaticLabel.Text = "Car Patent:";
             // 
             // cardIdLabel
             // 
             this.cardIdLabel.AutoSize = true;
-            this.cardIdLabel.Location = new System.Drawing.Point(104, 120);
+            this.cardIdLabel.Location = new System.Drawing.Point(103, 210);
             this.cardIdLabel.Name = "cardIdLabel";
             this.cardIdLabel.Size = new System.Drawing.Size(153, 22);
             this.cardIdLabel.TabIndex = 10;
             this.cardIdLabel.Text = "             ";
             // 
-            // label8
+            // cardInformationStaticLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label8.Location = new System.Drawing.Point(13, 86);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(218, 23);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Card Information";
+            this.cardInformationStaticLabel.AutoSize = true;
+            this.cardInformationStaticLabel.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cardInformationStaticLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.cardInformationStaticLabel.Location = new System.Drawing.Point(12, 176);
+            this.cardInformationStaticLabel.Name = "cardInformationStaticLabel";
+            this.cardInformationStaticLabel.Size = new System.Drawing.Size(218, 23);
+            this.cardInformationStaticLabel.TabIndex = 9;
+            this.cardInformationStaticLabel.Text = "Card Information";
             // 
-            // label3
+            // cardIdStaticLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 120);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 22);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "CardID:";
+            this.cardIdStaticLabel.AutoSize = true;
+            this.cardIdStaticLabel.Location = new System.Drawing.Point(10, 210);
+            this.cardIdStaticLabel.Name = "cardIdStaticLabel";
+            this.cardIdStaticLabel.Size = new System.Drawing.Size(87, 22);
+            this.cardIdStaticLabel.TabIndex = 8;
+            this.cardIdStaticLabel.Text = "CardID:";
             // 
             // textBoxMsg
             // 
             this.textBoxMsg.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxMsg.Location = new System.Drawing.Point(16, 40);
             this.textBoxMsg.Name = "textBoxMsg";
-            this.textBoxMsg.Size = new System.Drawing.Size(324, 31);
+            this.textBoxMsg.Size = new System.Drawing.Size(382, 31);
             this.textBoxMsg.TabIndex = 1;
+            this.textBoxMsg.Text = "Please eject card";
             // 
-            // btnConfigGo
+            // btnEject
             // 
-            this.btnConfigGo.Enabled = false;
-            this.btnConfigGo.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfigGo.Location = new System.Drawing.Point(17, 360);
-            this.btnConfigGo.Name = "btnConfigGo";
-            this.btnConfigGo.Size = new System.Drawing.Size(103, 31);
-            this.btnConfigGo.TabIndex = 6;
-            this.btnConfigGo.Text = "Charge!";
-            this.btnConfigGo.UseVisualStyleBackColor = true;
-            this.btnConfigGo.Click += new System.EventHandler(this.btnConfigGo_Click);
-            // 
-            // textBoxConfigAmt
-            // 
-            this.textBoxConfigAmt.Location = new System.Drawing.Point(16, 314);
-            this.textBoxConfigAmt.Name = "textBoxConfigAmt";
-            this.textBoxConfigAmt.Size = new System.Drawing.Size(324, 29);
-            this.textBoxConfigAmt.TabIndex = 2;
-            this.textBoxConfigAmt.Text = "0";
-            this.textBoxConfigAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 194);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(175, 22);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Parking Credit:";
+            this.btnEject.Enabled = false;
+            this.btnEject.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEject.Location = new System.Drawing.Point(107, 90);
+            this.btnEject.Name = "btnEject";
+            this.btnEject.Size = new System.Drawing.Size(175, 68);
+            this.btnEject.TabIndex = 6;
+            this.btnEject.Text = "Eject card";
+            this.btnEject.UseVisualStyleBackColor = true;
+            this.btnEject.Click += new System.EventHandler(this.btnEject_Click);
             // 
             // label1
             // 
@@ -254,9 +187,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 23);
+            this.label1.Size = new System.Drawing.Size(101, 23);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Reader Status";
+            this.label1.Text = "Message";
             // 
             // Credit
             // 
@@ -277,7 +210,7 @@
             this.Credit.Location = new System.Drawing.Point(4, 31);
             this.Credit.Name = "Credit";
             this.Credit.Padding = new System.Windows.Forms.Padding(3);
-            this.Credit.Size = new System.Drawing.Size(366, 476);
+            this.Credit.Size = new System.Drawing.Size(366, 287);
             this.Credit.TabIndex = 1;
             this.Credit.Text = "Credit";
             this.Credit.UseVisualStyleBackColor = true;
@@ -441,7 +374,7 @@
             this.Debit.Location = new System.Drawing.Point(4, 31);
             this.Debit.Name = "Debit";
             this.Debit.Padding = new System.Windows.Forms.Padding(3);
-            this.Debit.Size = new System.Drawing.Size(366, 476);
+            this.Debit.Size = new System.Drawing.Size(366, 287);
             this.Debit.TabIndex = 2;
             this.Debit.Text = "Debit";
             this.Debit.UseVisualStyleBackColor = true;
@@ -645,7 +578,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(398, 574);
+            this.ClientSize = new System.Drawing.Size(436, 347);
             this.Controls.Add(this.tabControl);
             this.Name = "Main";
             this.Text = "Parking System - Shop App";
@@ -667,10 +600,7 @@
         private System.Windows.Forms.TabPage Configure;
         private System.Windows.Forms.TabPage Credit;
         private System.Windows.Forms.TabPage Debit;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxConfigAmt;
-        private System.Windows.Forms.Button btnConfigGo;
         private System.Windows.Forms.Button btn500;
         private System.Windows.Forms.Button btn200;
         private System.Windows.Forms.Button btn100;
@@ -707,14 +637,11 @@
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Button btnCredit;
         private System.Windows.Forms.Label cardIdLabel;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label freeHourslabel;
-        private System.Windows.Forms.Label quantityFreeHourslabel;
-        private System.Windows.Forms.Label labelAmt;
+        private System.Windows.Forms.Label cardInformationStaticLabel;
+        private System.Windows.Forms.Label cardIdStaticLabel;
         private System.Windows.Forms.Label carPatentLabel;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label carPatentStaticLabel;
+        private System.Windows.Forms.Button btnEject;
     }
 }
 
