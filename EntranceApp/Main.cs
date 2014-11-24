@@ -206,14 +206,20 @@ namespace imseWCard2
             // Connection lost.
             if (connected && ejected)
             {
-                textBoxMsg.Text = "Bye Bye! Enjoy your shopping!";
+                textBoxMsg.Text = "Bye Bye! Enjoy your shopping! Gate opening..";
                 ejected = false;
+                openGate();
             }
 
             unDisplayInformation();
             btnEject.Enabled = false;
             connected = false;
             return;
+        }
+
+        private void openGate()
+        {
+            //Physical opening of gate
         }
 
         private void resetAmountMemoryValues()
