@@ -176,8 +176,11 @@ namespace imseWCard2
             cardIdLabel.Text = cardId;
             carPatentLabel.Text = carPatent;
 
-            string[] time = entranceTime.Split('_');
-            entranceTimeLabel.Text = time[0]+" "+time[1];
+            if(entranceTime!="") //sometimes the entranceTime might be "" if the card was just taken away.
+            {
+                string[] time = entranceTime.Split('_');
+                entranceTimeLabel.Text = time[0]+" "+time[1];
+            }
         }
 
         private bool authenticateSector(int sector)
