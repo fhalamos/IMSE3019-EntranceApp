@@ -262,6 +262,9 @@ namespace imseWCard2
         private void btnEject_Click(object sender, EventArgs e)
         {
 
+            if( authenticateSector(amountsSector))
+                resetAmountMemoryValues();
+
             if (authenticateSector(informationSector))
             {
                 //In case there is old information written on it
@@ -273,8 +276,6 @@ namespace imseWCard2
 
                 assignEntranceTime();
                 
-                resetAmountMemoryValues();
-
                 displayInformation();
 
                 ejectCard();
