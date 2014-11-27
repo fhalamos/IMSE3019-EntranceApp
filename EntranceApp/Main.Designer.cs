@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Configure = new System.Windows.Forms.TabPage();
+            this.entranceTimeLabel = new System.Windows.Forms.Label();
             this.entranceTimeStaticLabel = new System.Windows.Forms.Label();
             this.carPatentLabel = new System.Windows.Forms.Label();
             this.carPatentStaticLabel = new System.Windows.Forms.Label();
@@ -76,7 +77,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.entranceTimeLabel = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.Configure.SuspendLayout();
             this.Credit.SuspendLayout();
@@ -115,6 +115,15 @@
             this.Configure.Size = new System.Drawing.Size(404, 360);
             this.Configure.TabIndex = 0;
             this.Configure.Text = "Entrance Application";
+            // 
+            // entranceTimeLabel
+            // 
+            this.entranceTimeLabel.AutoSize = true;
+            this.entranceTimeLabel.Location = new System.Drawing.Point(12, 318);
+            this.entranceTimeLabel.Name = "entranceTimeLabel";
+            this.entranceTimeLabel.Size = new System.Drawing.Size(186, 22);
+            this.entranceTimeLabel.TabIndex = 19;
+            this.entranceTimeLabel.Text = "                ";
             // 
             // entranceTimeStaticLabel
             // 
@@ -588,15 +597,6 @@
             // 
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // entranceTimeLabel
-            // 
-            this.entranceTimeLabel.AutoSize = true;
-            this.entranceTimeLabel.Location = new System.Drawing.Point(12, 318);
-            this.entranceTimeLabel.Name = "entranceTimeLabel";
-            this.entranceTimeLabel.Size = new System.Drawing.Size(186, 22);
-            this.entranceTimeLabel.TabIndex = 19;
-            this.entranceTimeLabel.Text = "                ";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -605,7 +605,7 @@
             this.ClientSize = new System.Drawing.Size(443, 420);
             this.Controls.Add(this.tabControl);
             this.Name = "Main";
-            this.Text = "Parking System - Shop App";
+            this.Text = "Parking System - Entrance App";
             this.Load += new System.EventHandler(this.Main_Load);
             this.tabControl.ResumeLayout(false);
             this.Configure.ResumeLayout(false);
