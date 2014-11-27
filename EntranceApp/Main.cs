@@ -1,5 +1,5 @@
 ﻿/*=======================================================================================================================
-    Parking System Project - IMSE3019 - Shop Application
+    Parking System Project - IMSE3019 - Entrance Application
 
     Created by  : Felipe Alamos
     Date        : 2nd December 2014
@@ -86,10 +86,7 @@ namespace imseWCard2
 
             textBoxMsg.Text = "No card available. Please call for asistance";
 
-            cardInformationStaticLabel.Visible = false;
-            cardIdStaticLabel.Visible = false;
-            carPatentStaticLabel.Visible = false;
-            entranceTimeStaticLabel.Visible = false;
+            unDisplayInformation();
 
 
         }

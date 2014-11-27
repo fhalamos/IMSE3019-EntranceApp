@@ -605,6 +605,7 @@
             this.ClientSize = new System.Drawing.Size(443, 420);
             this.Controls.Add(this.tabControl);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Parking System - Entrance App";
             this.Load += new System.EventHandler(this.Main_Load);
             this.tabControl.ResumeLayout(false);
