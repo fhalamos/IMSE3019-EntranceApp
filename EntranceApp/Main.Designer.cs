@@ -33,8 +33,8 @@
             this.Configure = new System.Windows.Forms.TabPage();
             this.entranceTimeLabel = new System.Windows.Forms.Label();
             this.entranceTimeStaticLabel = new System.Windows.Forms.Label();
-            this.carPatentLabel = new System.Windows.Forms.Label();
-            this.carPatentStaticLabel = new System.Windows.Forms.Label();
+            this.carPlateLabel = new System.Windows.Forms.Label();
+            this.carPlateStaticLabel = new System.Windows.Forms.Label();
             this.cardIdLabel = new System.Windows.Forms.Label();
             this.cardInformationStaticLabel = new System.Windows.Forms.Label();
             this.cardIdStaticLabel = new System.Windows.Forms.Label();
@@ -61,8 +61,8 @@
             this.Configure.BackColor = System.Drawing.Color.LightBlue;
             this.Configure.Controls.Add(this.entranceTimeLabel);
             this.Configure.Controls.Add(this.entranceTimeStaticLabel);
-            this.Configure.Controls.Add(this.carPatentLabel);
-            this.Configure.Controls.Add(this.carPatentStaticLabel);
+            this.Configure.Controls.Add(this.carPlateLabel);
+            this.Configure.Controls.Add(this.carPlateStaticLabel);
             this.Configure.Controls.Add(this.cardIdLabel);
             this.Configure.Controls.Add(this.cardInformationStaticLabel);
             this.Configure.Controls.Add(this.cardIdStaticLabel);
@@ -96,23 +96,23 @@
             this.entranceTimeStaticLabel.TabIndex = 18;
             this.entranceTimeStaticLabel.Text = "Entrance time";
             // 
-            // carPatentLabel
+            // carPlateLabel
             // 
-            this.carPatentLabel.AutoSize = true;
-            this.carPatentLabel.Location = new System.Drawing.Point(148, 242);
-            this.carPatentLabel.Name = "carPatentLabel";
-            this.carPatentLabel.Size = new System.Drawing.Size(153, 22);
-            this.carPatentLabel.TabIndex = 17;
-            this.carPatentLabel.Text = "             ";
+            this.carPlateLabel.AutoSize = true;
+            this.carPlateLabel.Location = new System.Drawing.Point(223, 242);
+            this.carPlateLabel.Name = "carPlateLabel";
+            this.carPlateLabel.Size = new System.Drawing.Size(153, 22);
+            this.carPlateLabel.TabIndex = 17;
+            this.carPlateLabel.Text = "             ";
             // 
-            // carPatentStaticLabel
+            // carPlateStaticLabel
             // 
-            this.carPatentStaticLabel.AutoSize = true;
-            this.carPatentStaticLabel.Location = new System.Drawing.Point(11, 242);
-            this.carPatentStaticLabel.Name = "carPatentStaticLabel";
-            this.carPatentStaticLabel.Size = new System.Drawing.Size(131, 22);
-            this.carPatentStaticLabel.TabIndex = 16;
-            this.carPatentStaticLabel.Text = "Car Patent:";
+            this.carPlateStaticLabel.AutoSize = true;
+            this.carPlateStaticLabel.Location = new System.Drawing.Point(11, 242);
+            this.carPlateStaticLabel.Name = "carPlateStaticLabel";
+            this.carPlateStaticLabel.Size = new System.Drawing.Size(197, 22);
+            this.carPlateStaticLabel.TabIndex = 16;
+            this.carPlateStaticLabel.Text = "Car Plate Number:";
             // 
             // cardIdLabel
             // 
@@ -207,8 +207,8 @@
         private System.Windows.Forms.Label cardIdLabel;
         private System.Windows.Forms.Label cardInformationStaticLabel;
         private System.Windows.Forms.Label cardIdStaticLabel;
-        private System.Windows.Forms.Label carPatentLabel;
-        private System.Windows.Forms.Label carPatentStaticLabel;
+        private System.Windows.Forms.Label carPlateLabel;
+        private System.Windows.Forms.Label carPlateStaticLabel;
         private System.Windows.Forms.Button btnEject;
         private System.Windows.Forms.Label entranceTimeStaticLabel;
         private System.Windows.Forms.Label entranceTimeLabel;

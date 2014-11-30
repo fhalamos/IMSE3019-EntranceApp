@@ -10,11 +10,12 @@
 
         3. The current application enables the Entrance Gate to administrate the parking card.
 
-        4. The 1st block of Sector 14 is used to save the card id. THe 2nd block of Sector 14 is used to save the car patent.
+        4. The 1st block of Sector 14 is used to save the card id. THe 2nd block of Sector 14 is used to save the car Plate.
            The 3rd block of Sector 14 is used to save the entrance time.
 
         5. The 3 blocks of Sector 15 are used to save the amounts of the 3 biggest purchases, i.e. blocks 0x3C, 0x3D, 0x3E
-*///=======================================================================================================================
+*/
+//=======================================================================================================================
 
 
 using System;
@@ -48,12 +49,12 @@ namespace imseWCard2
         private int amount1Block = 0x3D;
         private int amount2Block = 0x3E;
 
-        //Block 0 of sector 14, i.e block 0x38, is used to save card ID. Block 1, i.e block 0x39, is used to save car patent.
+        //Block 0 of sector 14, i.e block 0x38, is used to save card ID. Block 1, i.e block 0x39, is used to save car plate.
         //Block 2, i.e. block 0x3A is used to save the time of entrance
 
         private int informationSector = 14;
         private int cardIdBlock = 0x38;
-        private int carPatentBlock = 0x39;
+        private int carPlateBlock = 0x39;
         private int entranceTimeBlock = 0x3A;
 
 
@@ -117,11 +118,11 @@ namespace imseWCard2
 
                 string cardId = assignCardId();
 
-                string carPatent = readAndWriteCarPatent();
+                string carPlate = readAndWriteCarPlate();
 
                 assignEntranceTime();
 
-                saveCardInLocalFile(cardId, carPatent);
+                saveCardInLocalFile(cardId, carPlate);
 
                 displayInformation();
 
@@ -138,21 +139,21 @@ namespace imseWCard2
         {
             cardInformationStaticLabel.Visible = false;
             cardIdStaticLabel.Visible = false;
-            carPatentStaticLabel.Visible = false;
+            carPlateStaticLabel.Visible = false;
             entranceTimeStaticLabel.Visible = false;
 
             cardIdLabel.Text = "";
-            carPatentLabel.Text = "";
+            carPlateLabel.Text = "";
             entranceTimeLabel.Text = "";
         }
 
         private void displayInformation()
         {
             string cardId = "";
-            string carPatent = "";
+            string carPlate = "";
             string entranceTime = "";
 
-            if (CADw.read(cardIdBlock, ref cardId) == false || CADw.read(carPatentBlock, ref carPatent) == false ||
+            if (CADw.read(cardIdBlock, ref cardId) == false || CADw.read(carPlateBlock, ref carPlate) == false ||
                 CADw.read(entranceTimeBlock, ref entranceTime) == false)
             {
                 textBoxMsg.Text = "Read value error!";
@@ -162,11 +163,11 @@ namespace imseWCard2
             // Display the information 
             cardInformationStaticLabel.Visible = true;
             cardIdStaticLabel.Visible = true;
-            carPatentStaticLabel.Visible = true;
+            carPlateStaticLabel.Visible = true;
             entranceTimeStaticLabel.Visible = true;
 
             cardIdLabel.Text = cardId;
-            carPatentLabel.Text = carPatent;
+            carPlateLabel.Text = carPlate;
 
             if (entranceTime != "") //sometimes the entranceTime might be "" if the card was just taken away.
             {
@@ -227,7 +228,7 @@ namespace imseWCard2
         private void resetCardInformation()
         {
             CADw.write(cardIdBlock, "");
-            CADw.write(carPatentBlock, "");
+            CADw.write(carPlateBlock, "");
             CADw.write(entranceTimeBlock, "");
         }
 
@@ -259,19 +260,19 @@ namespace imseWCard2
             return str;
         }
 
-        private void saveCardInLocalFile(string cardId, string carPatent)
+        private void saveCardInLocalFile(string cardId, string carPlate)
         {
-            string path = @"cards-patents.txt";
+            string path = @"cards-plates.txt";
             if (!File.Exists(path))
             {
                 File.Create(path).Dispose();
                 TextWriter tw = new StreamWriter(path);
-                tw.WriteLine("Record of all cards-car´s patent pairs.");
+                tw.WriteLine("Record of all cards-car´s plate pairs.");
                 tw.WriteLine("***********");
                 tw.Close();
             }
             TextWriter tw2 = new StreamWriter(path,true);
-            tw2.WriteLine(cardId+';'+carPatent);
+            tw2.WriteLine(cardId+';'+carPlate);
             tw2.Close();
 
         }
@@ -294,16 +295,16 @@ namespace imseWCard2
             return;
         }
 
-        private string readAndWriteCarPatent()
+        private string readAndWriteCarPlate()
         {
-            string carPatent = cameraGetCarPatent();
-            CADw.write(carPatentBlock, carPatent);
-            return carPatent;
+            string carPlate = cameraGetCarPlate();
+            CADw.write(carPlateBlock, carPlate);
+            return carPlate;
         }
 
-        private string cameraGetCarPatent()
+        private string cameraGetCarPlate()
         {
-            //Here the camera reads the car patents and returns the value.
+            //Here the camera reads the car plate and returns the value.
             //Now we just return a random string of length 6
             return randomString(7);
         }
@@ -333,14 +334,16 @@ namespace imseWCard2
         {
             //We assign the next valid ID.
             //First read last ID assigned
-            string path = @"cards-patents.txt";
+            string path = @"cards-plates.txt";
             if (!File.Exists(path))
                 return "1";
             
-            int lastId = int.Parse(File.ReadLines("cards-patents.txt").Last().Split(';')[0]);
+            int lastId = int.Parse(File.ReadLines("cards-plates.txt").Last().Split(';')[0]);
             int currentId = lastId + 1;
             return currentId + "";
         }
+
+      
     }
 
 }
