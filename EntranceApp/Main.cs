@@ -76,6 +76,8 @@ namespace imseWCard2
 
         private void Main_Load(object sender, EventArgs e)
         {
+            unDisplayInformation();
+            
             if (!CADw.initialize())  // initialize the object CADw
             {
                 textBoxMsg.Text = "Reader initialization failed! Please call for asistance.";
@@ -84,8 +86,6 @@ namespace imseWCard2
             timer1.Enabled = true;
 
             textBoxMsg.Text = "No card available. Please call for asistance";
-
-            unDisplayInformation();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -102,6 +102,36 @@ namespace imseWCard2
                     btnEject.Enabled = true;
                 }
             }
+        }
+
+        private void btnEject_Click(object sender, EventArgs e)
+        {
+
+            if (authenticateSector(amountsSector))
+                resetAmountMemoryValues();
+
+            if (authenticateSector(informationSector))
+            {
+                //In case there is old information written on it
+                resetCardInformation();
+
+                string cardId = assignCardId();
+
+                string carPatent = readAndWriteCarPatent();
+
+                assignEntranceTime();
+
+                saveCardInLocalFile(cardId, carPatent);
+
+                displayInformation();
+
+                ejectCard();
+
+                textBoxMsg.Text = "Please take your card";
+
+                btnEject.Enabled = false;
+            }
+
         }
 
         private void unDisplayInformation()
@@ -229,36 +259,6 @@ namespace imseWCard2
             return str;
         }
 
-        private void btnEject_Click(object sender, EventArgs e)
-        {
-
-            if (authenticateSector(amountsSector))
-                resetAmountMemoryValues();
-
-            if (authenticateSector(informationSector))
-            {
-                //In case there is old information written on it
-                resetCardInformation();
-
-                string cardId = assignCardId();
-
-                string carPatent = readAndWriteCarPatent();
-
-                assignEntranceTime();
-
-                saveCardInLocalFile(cardId, carPatent);
-
-                displayInformation();
-
-                ejectCard();
-
-                textBoxMsg.Text = "Please take your card";
-
-                btnEject.Enabled = false;
-            }
-
-        }
-
         private void saveCardInLocalFile(string cardId, string carPatent)
         {
             string path = @"cards-patents.txt";
@@ -322,7 +322,6 @@ namespace imseWCard2
             return new string(buffer);
         }
         
-
         private string assignCardId()
         {
             string cardId = getNewCardId();
