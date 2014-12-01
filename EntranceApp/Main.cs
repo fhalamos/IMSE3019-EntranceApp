@@ -40,9 +40,6 @@ namespace imseWCard2
         // true if a smart card is connected. Otherwise, false. 
         private bool connected = false;
 
-        // true if a transaction is done. Reset to false if a connection is lost.
-        private bool transectionDone = false;
-
         // Block 0, 1 and 2 of sector 15, i.e. block 0x3Cx, 0x3D, 0x3E, are used to save the biggest purchases
         private int amountsSector = 15;
         private int amount0Block = 0x3C;
