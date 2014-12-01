@@ -272,7 +272,7 @@ namespace imseWCard2
                 tw.Close();
             }
             TextWriter tw2 = new StreamWriter(path,true);
-            tw2.WriteLine(cardId+';'+carPlate);
+            tw2.WriteLine("Card Id:"+ cardId+';'+" Car Plate Number: "+carPlate);
             tw2.Close();
 
         }
@@ -306,20 +306,28 @@ namespace imseWCard2
         {
             //Here the camera reads the car plate and returns the value.
             //Now we just return a random string of length 6
-            return randomString(7);
+            return randomPlate();
         }
 
-        private string randomString(int size)
+        private string randomPlate()
         {
             Random _rng = new Random();
-            string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+            string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
-            char[] buffer = new char[size];
+            char[] buffer = new char[6];
 
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < 2; i++)
             {
                 buffer[i] = _chars[_rng.Next(_chars.Length)];
             }
+
+            _chars = "123456789";
+
+            for (int i = 2; i < 6; i++)
+            {
+                buffer[i] = _chars[_rng.Next(_chars.Length)];
+            }
+
             return new string(buffer);
         }
         
@@ -337,8 +345,9 @@ namespace imseWCard2
             string path = @"cards-plates.txt";
             if (!File.Exists(path))
                 return "1";
-            
-            int lastId = int.Parse(File.ReadLines("cards-plates.txt").Last().Split(';')[0]);
+
+
+            int lastId = int.Parse(File.ReadLines("cards-plates.txt").Last().Split(';')[0].Split(':')[1]);
             int currentId = lastId + 1;
             return currentId + "";
         }
